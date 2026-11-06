@@ -3,24 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VideoStudio - Internal Media Management</title>
+    <title>VideoStudio - Internal Media Management Workspace</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #333; line-height: 1.6; }
-        header { background-color: #006B68; padding: 15px 40px; display: flex; align-items: center; justify-content: space-between; color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        :root {
+            --primary: #006B68;
+            --accent: #FFC62F;
+            --bg-body: #F4F7F6;
+            --bg-card: #FFFFFF;
+            --text-main: #334155;
+            --text-heading: #0F172A;
+        }
+        body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; }
+        header { background-color: var(--bg-card); padding: 15px 50px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 3px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100;}
         .logo-container { display: flex; align-items: center; gap: 15px; }
-        .logo-container img { width: 45px; height: 45px; border-radius: 8px; object-fit: cover; background: #FFC62F; }
-        .logo-container h1 { margin: 0; font-size: 1.6rem; font-weight: 700; letter-spacing: 0.5px; }
-        nav a { color: white; text-decoration: none; margin-left: 25px; font-weight: 500; opacity: 0.85; transition: 0.3s; font-size: 0.95rem; }
-        nav a:hover { color: #FFC62F; opacity: 1; }
-        .container { max-width: 900px; margin: 50px auto; padding: 40px; background: white; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
-        h2 { color: #006B68; border-bottom: 2px solid #f0f0f0; padding-bottom: 12px; margin-top: 0; font-size: 1.8rem; }
-        p { color: #555; font-size: 1.05rem; }
-        .compliance-box { background-color: #fffdf5; border-left: 5px solid #FFC62F; padding: 25px; margin-top: 40px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
-        .compliance-box h3 { margin-top: 0; color: #b07d00; font-size: 1.3rem; }
-        ul { padding-left: 22px; color: #444; }
+        .logo-container img { width: 42px; height: 42px; border-radius: 8px; object-fit: cover; }
+        .logo-container h1 { margin: 0; font-size: 1.5rem; font-weight: 700; color: var(--primary); letter-spacing: 0.5px; }
+        nav a { color: var(--text-heading); text-decoration: none; margin-left: 30px; font-weight: 500; transition: 0.2s; font-size: 0.95rem; }
+        nav a:hover, nav a.active-link { color: var(--primary); }
+        
+        .container { max-width: 900px; margin: 50px auto; padding: 0 20px; }
+        .hero { text-align: center; margin-bottom: 50px; }
+        .hero h2 { color: var(--text-heading); font-size: 2.2rem; margin-bottom: 15px; }
+        .hero p { font-size: 1.1rem; color: #64748B; max-width: 700px; margin: 0 auto; }
+
+        /* Tabs UI */
+        .compliance-section { background: var(--bg-card); border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); overflow: hidden; }
+        .tab-header { display: flex; background: #F8FAFC; border-bottom: 1px solid #E2E8F0; }
+        .tab-btn { flex: 1; background: inherit; border: none; padding: 18px 20px; font-size: 1rem; font-weight: 600; color: #64748B; cursor: pointer; transition: 0.3s; font-family: 'Roboto', sans-serif;}
+        .tab-btn:hover { background: #F1F5F9; color: var(--primary); }
+        .tab-btn.active { background: var(--bg-card); color: var(--primary); border-top: 3px solid var(--primary); border-bottom: 1px solid transparent; margin-bottom: -1px; }
+        
+        .tab-content { display: none; padding: 40px; animation: fadeIn 0.4s; }
+        .tab-content.active { display: block; }
+        .tab-content h3 { margin-top: 0; color: var(--text-heading); font-size: 1.4rem; display: flex; align-items: center; gap: 10px;}
+        .tab-content h3::before { content: ""; display: inline-block; width: 12px; height: 12px; background-color: var(--accent); border-radius: 50%; }
+        ul { padding-left: 20px; }
         li { margin-bottom: 12px; }
-        footer { text-align: center; padding: 25px; color: #888; font-size: 0.9rem; margin-top: 20px; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        footer { text-align: center; padding: 40px 20px; color: #94A3B8; font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -30,30 +52,78 @@
             <h1>VideoStudio</h1>
         </div>
         <nav>
-            <a href="index.html">Home</a>
+            <a href="index.html" class="active-link">Home</a>
             <a href="privacy.html">Privacy Policy</a>
             <a href="terms.html">Terms of Service</a>
         </nav>
     </header>
     
     <div class="container">
-        <h2>Internal Media Workflow Automation</h2>
-        <p>VideoStudio is a proprietary desktop client developed exclusively for internal operations. It provides our media team with a secure, centralized workspace to manage digital assets, coordinate publishing schedules, and streamline the distribution of approved media to our official channels via authorized API integrations.</p>
-        
-        <div class="compliance-box">
-            <h3>Strict Adherence to TikTok Platform Policies</h3>
-            <p>VideoStudio is engineered with compliance at its core. Our internal workflows strictly enforce TikTok's developer and community standards to ensure absolute platform integrity. We mandate operational compliance with:</p>
-            <ul>
-                <li><strong>Community Guidelines:</strong> Zero tolerance for content involving violence, hate speech, misinformation, or sexually explicit material. All internal media undergoes strict human review prior to any API submission.</li>
-                <li><strong>Intellectual Property Policy:</strong> VideoStudio restricts uploads exclusively to original content owned by our organization. We strictly prohibit copyright infringement, unauthorized watermarks, and counterfeit material.</li>
-                <li><strong>Integrity and Authenticity:</strong> Our system is designed solely for legitimate internal publishing. We strictly forbid the use of our integration for API spamming, artificial metric inflation (fake likes/views), or coordinated inauthentic behavior.</li>
-                <li><strong>Data Privacy API Terms:</strong> OAuth tokens are securely encrypted on the local machine. We do not crawl, scrape, or extract public user data from TikTok. The integration is strictly limited to the <code>video.upload</code> and <code>video.publish</code> endpoints for our own authenticated accounts.</li>
-            </ul>
+        <div class="hero">
+            <h2>Multi-Platform API Automation Workspace</h2>
+            <p>VideoStudio is an internal desktop application providing our media team with a secure, centralized dashboard to manage and distribute approved media to our official channels across TikTok, Meta, and YouTube.</p>
+        </div>
+
+        <div class="compliance-section">
+            <div class="tab-header">
+                <button class="tab-btn active" onclick="openTab(event, 'TikTok')">TikTok Compliance</button>
+                <button class="tab-btn" onclick="openTab(event, 'Meta')">Meta (Instagram/FB)</button>
+                <button class="tab-btn" onclick="openTab(event, 'YouTube')">YouTube API Services</button>
+            </div>
+
+            <!-- TikTok Tab -->
+            <div id="TikTok" class="tab-content active">
+                <h3>Strict Adherence to TikTok Policies</h3>
+                <p>Our integration strictly enforces TikTok's Developer Terms and Community Guidelines. The system operates solely on the <code>video.upload</code> and <code>video.publish</code> scopes for our own authenticated channels.</p>
+                <ul>
+                    <li><strong>Content Integrity:</strong> Zero tolerance for hate speech, misinformation, or sexually explicit material. All media undergoes internal human review prior to API submission.</li>
+                    <li><strong>Authentic Behavior:</strong> VideoStudio is designed strictly for legitimate publishing. We forbid API spamming, artificial metric inflation, or coordinated inauthentic behavior.</li>
+                    <li><strong>IP Protection:</strong> We restrict uploads to original content owned by our organization, actively preventing copyright infringement and unauthorized watermarks.</li>
+                </ul>
+            </div>
+
+            <!-- Meta Tab -->
+            <div id="Meta" class="tab-content">
+                <h3>Meta Platform & Graph API Compliance</h3>
+                <p>VideoStudio integrates with the Instagram Graph API and Facebook Login for Business to manage our professional creator/business accounts securely.</p>
+                <ul>
+                    <li><strong>Authorized Access:</strong> We utilize official OAuth 2.0 protocols to link our internal Facebook Pages and Professional Instagram accounts without compromising credentials.</li>
+                    <li><strong>Content Standards:</strong> All assets pushed via the Graph API comply strictly with Meta's Community Standards and Platform Terms.</li>
+                    <li><strong>Data Minimization:</strong> We only request scopes necessary for content publishing (e.g., <code>instagram_content_publish</code>) and do not crawl or extract public user data from the Meta ecosystem.</li>
+                </ul>
+            </div>
+
+            <!-- YouTube Tab -->
+            <div id="YouTube" class="tab-content">
+                <h3>YouTube API Services Guidelines</h3>
+                <p>Our application utilizes YouTube API Services to automate video uploads to our proprietary YouTube channels. By using this integration, we inherently comply with Google's ecosystem rules.</p>
+                <ul>
+                    <li><strong>Terms of Service:</strong> Our internal users are bound by the <a href="https://www.youtube.com/t/terms" target="_blank" style="color: var(--primary);">YouTube Terms of Service</a>.</li>
+                    <li><strong>Privacy Policy:</strong> We adhere to the <a href="https://policies.google.com/privacy" target="_blank" style="color: var(--primary);">Google Privacy Policy</a>. We do not collect or misuse user data via the YouTube Data API.</li>
+                    <li><strong>Anti-Spam:</strong> VideoStudio prohibits the manipulation of video metadata, tags, or thumbnails to deceive users, fully respecting YouTube's spam and deceptive practices policies.</li>
+                </ul>
+            </div>
         </div>
     </div>
     
     <footer>
         &copy; 2026 VideoStudio Internal Workspace. Contact: minhvq86@gmail.com
     </footer>
+
+    <script>
+        function openTab(evt, platformName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(platformName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
 </body>
 </html>
